@@ -116,9 +116,10 @@
 
 .head {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.6rem;
+  gap: 0.35rem 0.6rem;
 }
 
 .title {
@@ -132,6 +133,8 @@
   flex-shrink: 0;
   white-space: nowrap;
   font-size: 0.82rem;
+  /* при нехватке места рейтинг переносится на новую строку и остаётся справа */
+  margin-left: auto;
 
   small {
     color: rgba(244, 248, 252, 0.55);
