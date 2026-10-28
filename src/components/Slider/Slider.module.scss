@@ -1,0 +1,97 @@
+.slider {
+  --cards: 3;
+
+  display: grid;
+  gap: 1.1rem;
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.7rem;
+}
+
+.arrow {
+  align-self: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 1.7rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background: var(--grad-sun);
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.08);
+  }
+
+  &.right:hover {
+    transform: scale(1.08);
+  }
+}
+
+.viewport {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: repeat(var(--cards), 1fr);
+  gap: 1.1rem;
+  animation: floatUp 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.card {
+  min-width: 0;
+  border-radius: var(--radius);
+  display: grid;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.25);
+  transition: background 0.3s ease, width 0.35s ease, transform 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.55);
+    transform: scale(1.2);
+  }
+}
+
+.dotActive {
+  width: 30px;
+  background: var(--grad-sun);
+}
+
+@media (max-width: 1040px) {
+  .slider { --cards: 2; }
+}
+
+@media (max-width: 680px) {
+  .slider { --cards: 1; }
+
+  .arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+}

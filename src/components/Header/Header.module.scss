@@ -1,0 +1,462 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 120;
+  padding: 0.85rem 0;
+  transition: padding 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+
+  &.scrolled {
+    padding: 0.45rem 0;
+    background: rgba(4, 10, 31, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 12px 34px -16px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* ---------- Прогресс-бар прокрутки ---------- */
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--grad-sun);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+/* ---------- Строка внутри контейнера ---------- */
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+/* ---------- Логотип ---------- */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  font-size: clamp(1.4rem, 4.5vw, 1.85rem);
+  display: inline-block;
+  animation: floaty 5s ease-in-out infinite;
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 4.2vw, 1.14rem);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Навигация (десктоп: строка, ≤992: drawer) ---------- */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.72rem;
+  border-radius: 12px;
+  font-size: 0.89rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+}
+
+.linkIcon {
+  font-size: 1rem;
+}
+
+.linkActive {
+  color: #fff;
+  background: linear-gradient(120deg, rgba(255, 154, 0, 0.28), rgba(255, 61, 127, 0.28));
+  box-shadow: inset 0 0 0 1px rgba(255, 154, 0, 0.55);
+}
+
+/* Шапка и подвал панели — существуют только в мобильном drawer */
+.drawerHead,
+.drawerFoot {
+  display: none;
+}
+
+/* ---------- Правый блок действий ---------- */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-left: 0.3rem;
+  flex-shrink: 0;
+}
+
+/* Иконка «Избранное» с бейджем-счётчиком */
+.favBtn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 1.05rem;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 61, 127, 0.16);
+    box-shadow: inset 0 0 0 1px rgba(255, 61, 127, 0.6);
+    transform: translateY(-2px);
+  }
+}
+
+.favCount {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--c-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(255, 61, 127, 0.55);
+  animation: pulseRing 2.4s infinite;
+}
+
+.callBtn {
+  padding: 0.62rem 1.25rem;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+/* ---------- Бургер (появляется только ≤992px) ---------- */
+
+.burger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+}
+
+/* Крестик: класс на самой кнопке — без сиблинг-хаков */
+.burgerX {
+  background: rgba(255, 61, 127, 0.22);
+  border-color: rgba(255, 61, 127, 0.65);
+
+  span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  span:nth-child(2) { opacity: 0; }
+  span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+/* ---------- Затемнение под drawer ---------- */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(2, 6, 18, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+}
+
+.backdropOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.4s ease;
+}
+
+/* ==========================================================
+   АДАПТИВ 1: напечатанные ноутбуки 992–1200px
+   Полное меню остаётся строкой, но компактное:
+   без иконок в ссылках и с урезанными паддингами.
+   ========================================================== */
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .link {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+    gap: 0;
+  }
+
+  .linkIcon {
+    display: none;
+  }
+
+  .callBtn {
+    padding: 0.55rem 1rem;
+    font-size: 0.84rem;
+  }
+
+  .favBtn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ==========================================================
+   АДАПТИВ 2: ≤992px — шторка
+   ========================================================== */
+
+@media (max-width: 992px) {
+  /* Специфичность выше глобального .btn — прячем кнопку звонка из бара */
+  .actions .callBtn {
+    display: none;
+  }
+
+  /* ❤️ и бургер всегда прижаты к правому краю контейнера:
+     nav — position: fixed и не участвует в потоке, поэтому прижимаем сами actions */
+  .actions {
+    margin-left: auto;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  /* Панель-шторка справа */
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 205;
+    width: min(360px, 90vw);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 1.1rem 1.25rem calc(1.6rem + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    background: rgba(5, 11, 32, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: -28px 0 70px rgba(0, 0, 0, 0.5);
+    transform: translateX(110%);
+    visibility: hidden;
+    transition:
+      transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+      visibility 0s linear 0.5s;
+  }
+
+  .navOpen {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* Шапка панели: мини-логотип + кнопка закрытия */
+  .drawerHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .close {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 61, 127, 0.3);
+      transform: rotate(90deg);
+    }
+  }
+
+  .list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.3rem;
+    padding: 1.1rem 0;
+  }
+
+  .link {
+    font-size: 1.02rem;
+    padding: 0.9rem 0.95rem;
+    border-radius: 14px;
+  }
+
+  .linkIcon {
+    font-size: 1.25rem;
+  }
+
+  .linkActive .linkIcon {
+    animation: floaty 3s ease-in-out infinite;
+  }
+
+  /* Подвал панели */
+  .drawerFoot {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: auto;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .drawerFav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 0.95rem;
+    border-radius: 14px;
+    font-weight: 600;
+    color: var(--c-accent);
+    background: rgba(255, 61, 127, 0.1);
+    transition: background 0.3s ease;
+
+    &:hover { background: rgba(255, 61, 127, 0.2); }
+  }
+
+  .drawerFavCount {
+    display: inline-grid;
+    place-items: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: var(--c-accent);
+    color: #fff;
+    font-size: 0.74rem;
+  }
+
+  .drawerPhone {
+    display: block;
+    padding: 0.85rem 0.95rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-weight: 600;
+    text-align: center;
+    transition: border-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      border-color: var(--c-gold);
+      color: var(--c-gold);
+    }
+  }
+
+  .drawerCall {
+    justify-content: center;
+    padding: 0.9rem 1rem;
+  }
+}
+
+/* ≤560px: шторка уже, зазоры компактнее */
+@media (max-width: 560px) {
+  .nav {
+    width: min(320px, 88vw);
+  }
+
+  .inner {
+    gap: 0.4rem;
+  }
+
+  .actions {
+    gap: 0.4rem;
+  }
+}
+
+/* ≤440px: минимум зазоров — влезает на 360px */
+@media (max-width: 440px) {
+  .inner {
+    gap: 0.3rem;
+  }
+
+  .actions {
+    gap: 0.3rem;
+  }
+
+  .favBtn,
+  .burger {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+}
+
+/* ≤360px: крайний случай 320px — кнопки 40px, иконки компактнее */
+@media (max-width: 360px) {
+  .favBtn,
+  .burger {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo {
+    gap: 0.35rem;
+  }
+
+  .nav {
+    width: min(300px, 86vw);
+  }
+}

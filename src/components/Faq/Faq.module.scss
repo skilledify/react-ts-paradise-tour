@@ -1,0 +1,73 @@
+.faq {
+  padding: clamp(3.4rem, 7vw, 6rem) 0;
+}
+
+.list {
+  max-width: 860px;
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.item {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  transition: border-color 0.3s ease, background 0.3s ease;
+
+  &.open {
+    border-color: rgba(255, 122, 0, 0.5);
+    background: rgba(255, 122, 0, 0.06);
+  }
+}
+
+.q {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  padding: 1.05rem 1.2rem;
+  background: none;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.icon {
+  font-size: 1.25rem;
+}
+
+.qText {
+  flex: 1;
+}
+
+.chevron {
+  transition: transform 0.35s ease;
+  font-size: 1.1rem;
+  color: var(--c-gold);
+
+  .open & {
+    transform: rotate(180deg);
+  }
+}
+
+.aWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.aInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.a {
+  padding: 0 1.2rem 1.15rem 3.05rem;
+  color: rgba(244, 248, 252, 0.78);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}

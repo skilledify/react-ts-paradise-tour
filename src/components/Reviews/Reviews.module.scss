@@ -1,0 +1,132 @@
+.reviews {
+  padding: clamp(3.4rem, 7vw, 6rem) 0;
+  background:
+    radial-gradient(700px 380px at 12% 20%, rgba(0, 180, 216, 0.15), transparent 60%),
+    radial-gradient(600px 340px at 88% 80%, rgba(255, 61, 127, 0.12), transparent 60%);
+}
+
+.stage {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.4rem;
+  max-width: 880px;
+}
+
+.card {
+  position: relative;
+  margin: 0;
+  padding: 2.1rem 2.2rem 1.6rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-card);
+  animation: floatUp 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.quoteMark {
+  position: absolute;
+  top: -8px;
+  left: 18px;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  line-height: 1;
+  background: var(--grad-sun);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  small {
+    display: block;
+    color: rgba(244, 248, 252, 0.55);
+    font-size: 0.85rem;
+  }
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 8px 22px -6px rgba(0, 0, 0, 0.5);
+}
+
+.stars {
+  font-size: 0.85rem;
+  margin-top: 0.15rem;
+  letter-spacing: 0.15em;
+}
+
+.text {
+  margin: 0;
+  font-size: 1.04rem;
+  line-height: 1.75;
+  color: rgba(244, 248, 252, 0.9);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+}
+
+.ctrl {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.07);
+  color: inherit;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    background: var(--grad-tropical);
+    transform: scale(1.1);
+  }
+}
+
+.dots {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  transition: background 0.3s ease, width 0.35s ease;
+}
+
+.dotOn {
+  width: 26px;
+  background: var(--grad-sun);
+}
+
+.cta {
+  margin-top: 1.6rem;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: 1.5rem 1.2rem 1.2rem;
+  }
+}

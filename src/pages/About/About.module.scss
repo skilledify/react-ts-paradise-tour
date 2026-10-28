@@ -1,0 +1,321 @@
+/* Мини-hero */
+.hero {
+  position: relative;
+  min-height: clamp(340px, 46vh, 560px);
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 6.2rem;
+  isolation: isolate;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px;
+    height: 56px;
+    background: #040a1f;
+    clip-path: ellipse(80% 100% at 50% 100%);
+    z-index: 1;
+  }
+}
+
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  animation: kenburns 20s ease-in-out infinite alternate;
+}
+
+.heroVeil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(4, 10, 31, 0.9), rgba(4, 10, 31, 0.45)),
+    linear-gradient(180deg, rgba(4, 10, 31, 0.5), transparent);
+}
+
+.heroContent {
+  padding: 2.5rem 0 3.6rem;
+  z-index: 2;
+}
+
+.h1 {
+  font-size: clamp(1.7rem, 4vw, 2.9rem);
+  font-weight: 900;
+}
+
+/* Чипсы-цифры */
+.badgeStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  > div,
+  > div > div {
+    display: grid;
+  }
+
+  > div > div {
+    padding: 1.4rem 1rem;
+    text-align: center;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.35s ease, border-color 0.35s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 180, 216, 0.6);
+    }
+
+    b {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      color: var(--c-gold);
+    }
+
+    span {
+      font-size: 0.87rem;
+      color: rgba(244, 248, 252, 0.7);
+    }
+  }
+}
+
+/* Ценности */
+.values {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.valueCard {
+  height: 100%;
+  border-radius: var(--radius);
+  padding: 1.6rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.4s ease;
+
+  &:hover {
+    transform: translateY(-7px);
+    border-color: rgba(255, 122, 0, 0.5);
+  }
+
+  h3 {
+    font-family: var(--font-body);
+    font-size: 1.06rem;
+    margin: 0.8rem 0 0.5rem;
+  }
+
+  p {
+    color: rgba(244, 248, 252, 0.72);
+    font-size: 0.94rem;
+  }
+}
+
+.valueIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 17px;
+  font-size: 1.5rem;
+  background: var(--grad-sun);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Таймлайн */
+.timelineSec {
+  background:
+    radial-gradient(800px 400px at 100% 10%, rgba(123, 47, 247, 0.12), transparent 60%),
+    radial-gradient(700px 400px at 0% 90%, rgba(0, 180, 216, 0.12), transparent 60%);
+}
+
+.timeline {
+  margin-top: 2.4rem;
+  position: relative;
+  display: grid;
+  gap: 1.4rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, var(--c-primary), var(--c-violet), var(--c-teal));
+    border-radius: 3px;
+    opacity: 0.6;
+  }
+}
+
+.tlItem {
+  display: grid;
+  grid-template-columns: 1fr 84px 1fr;
+  align-items: center;
+}
+
+.tlLeft {
+  .tlYear {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: start;
+  }
+}
+
+.tlCard {
+  grid-row: 1;
+  padding: 1.2rem 1.35rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 122, 0, 0.5);
+  }
+
+  h3 {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--c-gold);
+  }
+
+  p {
+    margin-top: 0.4rem;
+    color: rgba(244, 248, 252, 0.75);
+    font-size: 0.94rem;
+  }
+}
+
+.tlLeft .tlCard { grid-column: 1; text-align: right; }
+.tlRight .tlCard { grid-column: 3; }
+
+.tlYear {
+  display: grid;
+  justify-items: center;
+  grid-row: 1;
+  z-index: 2;
+
+  b {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--c-gold);
+    background: var(--c-deep);
+    padding: 0.25rem 0.15rem;
+    border-radius: 8px;
+  }
+
+  i {
+    font-style: normal;
+    font-size: 1.5rem;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+  }
+}
+
+/* Команда */
+.team {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+}
+
+.teamCard {
+  display: grid;
+  gap: 0.2rem;
+  justify-items: center;
+  text-align: center;
+  padding: 1.7rem 1rem 1.4rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.4s ease;
+
+  &:hover {
+    transform: translateY(-7px) rotate(-1deg);
+    border-color: rgba(0, 180, 216, 0.55);
+  }
+
+  b { font-size: 1.02rem; }
+  small { color: rgba(244, 248, 252, 0.65); font-size: 0.85rem; }
+}
+
+.teamAvatar {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 0.6rem;
+  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.55);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  .teamCard:hover & {
+    transform: scale(1.1) rotate(6deg);
+  }
+}
+
+.teamYears {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 209, 102, 0.12);
+  color: var(--c-gold);
+}
+
+@media (max-width: 1000px) {
+  .badgeStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .values {
+    grid-template-columns: 1fr;
+  }
+
+  .team {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeline::before {
+    left: 26px;
+  }
+
+  .tlItem {
+    grid-template-columns: 56px 1fr;
+    grid-template-areas: none;
+  }
+
+  .tlYear {
+    grid-column: 1 !important;
+    justify-self: center;
+  }
+
+  .tlLeft .tlCard,
+  .tlRight .tlCard {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+@media (max-width: 540px) {
+  .team {
+    grid-template-columns: 1fr;
+  }
+
+  .badgeStats {
+    grid-template-columns: 1fr;
+  }
+}

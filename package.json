@@ -1,0 +1,30 @@
+{
+  "name": "react-ts-paradise-tour",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "🌈 Многостраничный сайт туристической компании Paradise Tour из г. Южногорск — Vite + React + TypeScript + SCSS",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.4.0",
+    "sass": "^1.80.0",
+    "typescript": "^5.6.3",
+    "vite": "^6.3.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
