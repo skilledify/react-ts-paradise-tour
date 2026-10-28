@@ -10,7 +10,8 @@
 .layout {
   margin-top: 2.2rem;
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  /* minmax(0, …) — колонки могут сжиматься уже min-content и не вылезать за контейнер */
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: 1.6rem;
   align-items: start;
 }
@@ -21,7 +22,9 @@
   border-radius: var(--radius);
   padding: 1.6rem 1.6rem 1.7rem;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
+  min-width: 0;
 }
 
 fieldset {
@@ -30,6 +33,7 @@ fieldset {
   margin: 0;
   display: grid;
   gap: 0.8rem;
+  min-width: 0;
 
   legend {
     font-family: var(--font-display);
@@ -59,8 +63,9 @@ fieldset {
 /* Направления */
 .destGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.6rem;
+  min-width: 0;
 }
 
 .dest {
@@ -98,8 +103,9 @@ fieldset {
 /* Люди */
 .peopleGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1rem;
+  min-width: 0;
 
   label {
     display: grid;
@@ -173,6 +179,9 @@ fieldset {
 }
 
 select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   padding: 0.8rem 1rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -185,8 +194,9 @@ select {
 /* Допы */
 .extras {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.55rem;
+  min-width: 0;
 }
 
 .extra {
@@ -225,6 +235,7 @@ select {
 
   input {
     flex: 1 1 180px;
+    min-width: 0;
     padding: 0.78rem 1rem;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -262,8 +273,10 @@ select {
   border-radius: 26px;
   padding: 1.8rem 1.7rem 1.5rem;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   justify-items: start;
+  min-width: 0;
   background:
     radial-gradient(420px 220px at 110% -40px, rgba(255, 61, 127, 0.3), transparent 60%),
     var(--grad-ocean);
@@ -355,7 +368,7 @@ select {
 
 @media (max-width: 1000px) {
   .layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .total {
@@ -366,10 +379,10 @@ select {
 @media (max-width: 560px) {
   .destGrid,
   .extras {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .peopleGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
