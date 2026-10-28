@@ -10,11 +10,9 @@ const LINKS = [
   { to: '/contacts', label: 'Контакты' },
 ];
 
-type SocialLink = { icon: string; label: string; href?: string };
-
-const SOCIALS: SocialLink[] = [
-  // Заглушка: реальной ссылки на Telegram пока нет
-  { icon: '✈️', label: 'Telegram' },
+const SOCIALS: { icon: string; label: string; href: string }[] = [
+  // Самолёт ведёт на поиск авиабилетов
+  { icon: '✈️', label: 'Авиабилеты', href: 'https://www.aviasales.ru/' },
   { icon: '📷', label: 'Instagram', href: 'https://instagram.com/paradise_tour' },
   { icon: '📹', label: 'YouTube', href: 'https://youtube.com/@paradise_tour' },
   { icon: '💬', label: 'WhatsApp', href: 'https://wa.me/78005553535' },
@@ -52,30 +50,19 @@ export default function Footer() {
             планеты — от мальдивских лагун до камчатских вулканов. ✈️
           </p>
           <div className={styles.socials}>
-            {SOCIALS.map((s) =>
-              s.href ? (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={s.label}
-                  className={styles.social}
-                >
-                  <span aria-hidden>{s.icon}</span>
-                </a>
-              ) : (
-                <button
-                  key={s.label}
-                  type="button"
-                  aria-disabled="true"
-                  aria-label={`${s.label} — ссылка скоро появится`}
-                  className={`${styles.social} ${styles.socialStub}`}
-                >
-                  <span aria-hidden>{s.icon}</span>
-                </button>
-              ),
-            )}
+            {SOCIALS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={s.label}
+                title={s.label}
+                className={styles.social}
+              >
+                <span aria-hidden>{s.icon}</span>
+              </a>
+            ))}
           </div>
         </div>
 

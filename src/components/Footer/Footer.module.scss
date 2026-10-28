@@ -92,45 +92,6 @@
   }
 }
 
-/* Заглушка вместо ссылки (самолёт / Telegram) */
-.socialStub {
-  cursor: default;
-  opacity: 0.55;
-  filter: grayscale(0.35);
-
-  &:hover,
-  &:focus-visible {
-    transform: none;
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: none;
-  }
-
-  &::after {
-    content: 'Скоро';
-    position: absolute;
-    left: 50%;
-    bottom: calc(100% + 8px);
-    transform: translate(-50%, 4px);
-    padding: 0.28rem 0.6rem;
-    border-radius: 999px;
-    background: var(--c-gold);
-    color: #241a0b;
-    font-size: 0.7rem;
-    font-weight: 700;
-    line-height: 1.2;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  &:hover::after,
-  &:focus-visible::after {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
 .link {
   color: rgba(244, 248, 252, 0.78);
   transition: color 0.25s ease, padding-left 0.25s ease;
