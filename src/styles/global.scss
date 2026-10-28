@@ -60,6 +60,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Каркас страницы: main растягивается, футер прижат к низу
+   даже на коротких страницах и при любой ширине экрана */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+main {
+  flex: 1 0 auto;
+  min-width: 0;
+}
+
 img,
 video {
   max-width: 100%;
