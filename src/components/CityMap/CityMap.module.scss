@@ -1,0 +1,221 @@
+/* Схематичная карта: слой-подложка карточки контактов */
+
+.map {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ---------- Горы на севере ---------- */
+
+.ridge {
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.55));
+}
+
+.ridgeLine {
+  stroke: rgba(255, 255, 255, 0.11);
+  stroke-width: 1.5;
+}
+
+/* ---------- Берег и море ---------- */
+
+/* Набережная — дорога вдоль берега, чуть вглубь суши */
+.promenade {
+  fill: none;
+  stroke: #24406e;
+  stroke-width: 14;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+}
+
+/* Песчаная полоса: толстый штрих по линии берега, море перекрывает его
+   со стороны воды — остаётся ровно полоса пляжа */
+.beach {
+  fill: none;
+  stroke: #c9a06a;
+  stroke-width: 28;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+
+.sea {
+  fill: url(#cm-sea);
+}
+
+.surf {
+  fill: none;
+  stroke: rgba(160, 236, 255, 0.8);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px rgba(0, 190, 230, 0.6));
+}
+
+.wave {
+  fill: none;
+  stroke: rgba(190, 235, 255, 0.16);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.palms circle {
+  fill: #2f8f6b;
+  opacity: 0.9;
+}
+
+/* ---------- Кварталы ---------- */
+
+.blocks {
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
+
+  rect {
+    fill: #12294a;
+    stroke: rgba(255, 255, 255, 0.07);
+    stroke-width: 1;
+  }
+}
+
+/* ---------- Улицы ---------- */
+
+.roads {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
+
+  line {
+    stroke: #1f3d6c;
+    stroke-width: 14;
+    stroke-linecap: round;
+  }
+}
+
+.avenue {
+  stroke: url(#cm-avenue);
+  stroke-width: 18;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 16px rgba(255, 122, 0, 0.55));
+}
+
+/* ---------- Переулки ---------- */
+
+.lanes line {
+  stroke: #172b4e;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+/* ---------- Парк ---------- */
+
+.park {
+  path {
+    fill: #123a2e;
+    stroke: rgba(46, 196, 182, 0.35);
+    stroke-width: 1.5;
+  }
+
+  circle {
+    fill: #23684f;
+    opacity: 0.9;
+  }
+}
+
+/* ---------- Площадь ---------- */
+
+.plaza circle:nth-child(2) {
+  fill: rgba(255, 138, 40, 0.14);
+  stroke: rgba(255, 209, 102, 0.62);
+  stroke-width: 1.5;
+}
+
+.plazaRing {
+  fill: none;
+  stroke: rgba(255, 209, 102, 0.28);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 8;
+  stroke-linecap: round;
+}
+
+/* ---------- Точки интереса ---------- */
+
+.poiDot {
+  fill: var(--c-aqua);
+  stroke: rgba(4, 10, 31, 0.9);
+  stroke-width: 2;
+}
+
+.poiLabel {
+  fill: rgba(244, 248, 252, 0.62);
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+
+/* ---------- Подписи ---------- */
+
+.labels {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: rgba(244, 248, 252, 0.5);
+}
+
+.parkLabel {
+  fill: rgba(46, 196, 182, 0.8);
+  font-size: 12px;
+}
+
+/* На узких карточках низ карты уходит под плашку координат —
+   подписи парка и моря там не помещаются, убираем их */
+@media (max-width: 560px) {
+  .parkLabel,
+  .seaLabel {
+    display: none;
+  }
+}
+
+.plazaLabel {
+  fill: rgba(255, 209, 102, 0.9);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+/* Название моря — курсивом, как на бумажных картах */
+.seaLabel {
+  fill: rgba(178, 238, 255, 0.72);
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: none;
+}
+
+.quayLabel {
+  fill: rgba(244, 248, 252, 0.42);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+
+/* ---------- Компас ---------- */
+
+.compass {
+  circle {
+    fill: rgba(255, 255, 255, 0.05);
+    stroke: rgba(255, 255, 255, 0.18);
+    stroke-width: 1;
+  }
+
+  path {
+    fill: var(--c-gold);
+    opacity: 0.85;
+  }
+
+  text {
+    fill: rgba(244, 248, 252, 0.6);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+}

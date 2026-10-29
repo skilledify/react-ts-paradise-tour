@@ -73,6 +73,11 @@
   min-width: 0;
 }
 
+/* Шторка существует только на мобильных — на десктопе не рендерим её вид */
+.drawer {
+  display: none;
+}
+
 .list {
   display: flex;
   align-items: center;
@@ -232,6 +237,14 @@
   transition: opacity 0.4s ease;
 }
 
+/* Страховка: выше 992px шторки и затемнения не существует ни при каком состоянии */
+@media (min-width: 993px) {
+  .drawer,
+  .backdrop {
+    display: none;
+  }
+}
+
 /* ==========================================================
    АДАПТИВ 1: напечатанные ноутбуки 992–1200px
    Полное меню остаётся строкой, но компактное:
@@ -280,8 +293,10 @@
     display: flex;
   }
 
-  /* Панель-шторка справа */
-  .nav {
+  /* Панель-шторка справа. Живёт в портале на <body>, поэтому
+     никакие filter/transform родителя её больше не ломают. */
+  .drawer {
+    display: flex;
     position: fixed;
     top: 0;
     right: 0;
@@ -294,6 +309,7 @@
     margin: 0;
     padding: 1.1rem 1.25rem calc(1.6rem + env(safe-area-inset-bottom));
     overflow-y: auto;
+    overscroll-behavior: contain;
     background: rgba(5, 11, 32, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -306,10 +322,15 @@
       visibility 0s linear 0.5s;
   }
 
-  .navOpen {
+  .drawerOpen {
     transform: translateX(0);
     visibility: visible;
     transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* Строка навигации на мобильных не нужна — её роль играет шторка */
+  .nav {
+    display: none;
   }
 
   /* Шапка панели: мини-логотип + кнопка закрытия */
@@ -423,7 +444,7 @@
 
 /* ≤560px: шторка уже, зазоры компактнее */
 @media (max-width: 560px) {
-  .nav {
+  .drawer {
     width: min(320px, 88vw);
   }
 
@@ -466,7 +487,7 @@
     gap: 0.35rem;
   }
 
-  .nav {
+  .drawer {
     width: min(300px, 86vw);
   }
 }

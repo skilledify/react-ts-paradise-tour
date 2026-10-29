@@ -28,3 +28,6 @@ lerna-debug.log*
 
 # Кеш
 node_modules/.tmp
+
+# Локальная память WorkBuddy AI — не для репозитория
+.workbuddy-ai/
