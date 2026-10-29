@@ -3,7 +3,7 @@
 # 🌴 Paradise Tour
 
 **Добро пожаловать на сайт туристической компании Paradise Tour из г. Южногорск**:
-видео на пол экрана в hero, живой конструктор тура, галерея с лайтбоксом
+видео  в hero, живой конструктор тура, галерея с лайтбоксом
 и много красочной анимации.
 
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -16,7 +16,7 @@
 
 </div>
 
-> 🖼 Живое превью: `https://<ваш-логин>.github.io/react-ts-paradise-tour/`
+> 🖼 Живое превью: `https://skilledify.github.io/react-ts-paradise-tour/`
 > (автоматически после первого мерджа в `main`)
 
 ---
@@ -71,7 +71,7 @@ npm run typecheck # 🔬 только проверка типов
    git add -A
    git commit -m "🌴 Initial commit"
    git branch -M main
-   git remote add origin https://github.com/<user>/<repo>.git
+   git remote add origin https://github.com/skilledify/react-ts-paradise-tour.git
    git push -u origin main
    ```
 
@@ -83,7 +83,7 @@ npm run typecheck # 🔬 только проверка типов
    npm ci → npm run build → upload-pages-artifact → deploy-pages
    ```
 
-   Сайт появится на `https://<user>.github.io/<repo>/` 💫
+   Сайт появится на `https://skilledify.github.io/react-ts-paradise-tour/` 💫
 
 > 💡 Workflow автоматически подставляет `BASE_PATH: /${{ github.event.repository.name }}/`,
 > поэтому переименовать репозиторий — не проблема, ничего в коде править не нужно.
