@@ -54,7 +54,8 @@ export default function CallbackModal() {
               <b className="grad-text">PARADISE5</b> на скидку 5% к первому туру.
             </p>
             <button className="btn btn--primary" onClick={closeModal}>
-              Хорошо! 🌊
+              Хорошо!
+              <span className="btn-icon" aria-hidden>🌊</span>
             </button>
           </div>
         ) : (
@@ -73,7 +74,8 @@ export default function CallbackModal() {
               <span>Согласен(на) с обработкой персональных данных</span>
             </label>
             <button type="submit" className="btn btn--primary">
-              Отправить заявку 🚀
+              Отправить заявку
+              <span className="btn-icon" aria-hidden>🚀</span>
             </button>
           </form>
         )}

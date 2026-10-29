@@ -90,7 +90,8 @@ export default function Home() {
           <Reveal delay={0.2}>
             <div className={styles.center}>
               <Link to="/tours" className="btn btn--ghost">
-                Показать все {tours.length} туров →
+                Показать все {tours.length} туров
+                <span className="btn-icon" aria-hidden>→</span>
               </Link>
             </div>
           </Reveal>
@@ -140,9 +141,13 @@ export default function Home() {
               </p>
               <div className={styles.ctaButtons}>
                 <button className="btn btn--primary" onClick={() => modal.openModal('Экспресс-подбор тура')}>
-                  🎧 Получить консультацию
+                  <span className="btn-icon" aria-hidden>🎧</span>
+                  Получить консультацию
                 </button>
-                <Link to="/calculator" className="btn btn--ghost">🧮 Собрать тур самому</Link>
+                <Link to="/calculator" className="btn btn--ghost">
+                  <span className="btn-icon" aria-hidden>🧮</span>
+                  Собрать тур самому
+                </Link>
               </div>
             </div>
           </Reveal>

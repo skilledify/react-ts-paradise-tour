@@ -67,7 +67,10 @@ export default function Contacts() {
                     <span>Согласен(на) на обработку персональных данных</span>
                   </label>
 
-                  <button type="submit" className="btn btn--primary">Отправить 🚀</button>
+                  <button type="submit" className="btn btn--primary">
+                    Отправить
+                    <span className="btn-icon" aria-hidden>🚀</span>
+                  </button>
                 </form>
               )}
             </div>

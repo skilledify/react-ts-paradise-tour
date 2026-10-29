@@ -137,6 +137,10 @@
 }
 
 .couponBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
   margin-top: 0.9rem;
   width: 100%;
   padding: 0.75rem 1rem;
@@ -145,6 +149,7 @@
   background: rgba(255, 209, 102, 0.08);
   color: var(--c-gold);
   font-weight: 600;
+  line-height: 1.25;
   transition: background 0.3s ease, transform 0.3s ease;
 
   &:hover {

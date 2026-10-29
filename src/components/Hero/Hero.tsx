@@ -79,19 +79,22 @@ export default function Hero() {
           </label>
 
           <button type="submit" className={`btn btn--primary ${styles.searchBtn}`}>
-            🔍 Найти тур
+            <span className={`btn-icon ${styles.searchIcon}`} aria-hidden>🔍</span>
+            Найти тур
           </button>
         </form>
 
         <div className={styles.ctas}>
           <Link to="/tours" className="btn btn--ghost">
-            🏝️ Смотреть туры
+            <span className="btn-icon" aria-hidden>🏝️</span>
+            Смотреть туры
           </Link>
           <button
             className="btn btn--ghost"
             onClick={() => modal.openModal('Подбор тура')}
           >
-            🎧 Бесплатная консультация
+            <span className="btn-icon" aria-hidden>🎧</span>
+            Бесплатная консультация
           </button>
         </div>
 

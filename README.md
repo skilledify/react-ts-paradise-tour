@@ -91,7 +91,7 @@ npm run typecheck # 🔬 только проверка типов
 ## 🧪 Стек
 
 - **Vite 6** — мега-быстрая сборка, нулевой конфиг-ад
-- **React 19 + React Router 7** (HashRouter — дёшево и надёжно на GitHub Pages)
+- **React 19 + React Router 7** (BrowserRouter + fallback `404.html` для GitHub Pages)
 - **TypeScript 5** (`strict`), CSS-модули на **Sass**
 - **GitHub Actions + GitHub Pages** — CI/CD из коробки
 - ✨ **Никаких UI-библиотек**: слайдеры, лайтбокс, аккордеон, счётчики,
@@ -137,7 +137,7 @@ npm run typecheck # 🔬 только проверка типов
 
 | Токен | Значение |
 |---|---|
-| Шрифты | `Unbounded` (заголовки) + `Rubik` (текст) |
+| Шрифты | `Manrope` (заголовки) + `Inter` (текст) |
 | Градиенты | ☀️ sunset `#ff9a00 → #ff3d7f → #7b2ff7` · 🌊 ocean `#071233 → #00b4d8` |
 | Радиусы | `22px` карточки, `999px` пилюли, `10–18px` контролы |
 | Анимации | `floatUp`, `floaty`, `gradShift`, `kenburns`, `pulseRing`, `planeFly`, `shine`, `marquee` |

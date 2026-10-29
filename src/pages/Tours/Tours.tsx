@@ -149,7 +149,8 @@ export default function Tours() {
 
               {activeFilters && (
                 <button className={styles.reset} onClick={reset}>
-                  ✕ Сбросить
+                  <span className="btn-icon" aria-hidden>✕</span>
+                  Сбросить
                 </button>
               )}
             </div>

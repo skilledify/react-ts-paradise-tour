@@ -35,7 +35,10 @@ export default function TourDetail() {
             <span aria-hidden>🧭</span>
             <h2>Тур улетел в закат</h2>
             <p>Такого маршрута в каталоге нет.</p>
-            <Link to="/tours" className="btn btn--primary">Все туры →</Link>
+            <Link to="/tours" className="btn btn--primary">
+              Все туры
+              <span className="btn-icon" aria-hidden>→</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -173,14 +176,18 @@ export default function TourDetail() {
                   style={{ width: '100%', justifyContent: 'center' }}
                   onClick={() => modal.openModal(`Бронирование тура: ${tour.title} · ${money(total)}`)}
                 >
-                  🎫 Забронировать
+                  <span className="btn-icon" aria-hidden>🎫</span>
+                  Забронировать
                 </button>
 
                 <button
                   className={`${styles.favToggle} ${fav.has(tour.id) ? styles.favOn : ''}`}
                   onClick={() => fav.toggle(tour.id)}
                 >
-                  {fav.has(tour.id) ? '❤️ В избранном' : '🤍 В избранное'}
+                  <span className="btn-icon" aria-hidden>
+                    {fav.has(tour.id) ? '❤️' : '🤍'}
+                  </span>
+                  {fav.has(tour.id) ? 'В избранном' : 'В избранное'}
                 </button>
 
                 <ul className={styles.assure}>
@@ -197,11 +204,17 @@ export default function TourDetail() {
         <div className={styles.siblings}>
           <button onClick={() => navigate(`/tours/${prev.id}`)} className={styles.sib}>
             <small>← Предыдущий тур</small>
-            <b>🌴 {prev.title}</b>
+            <b>
+              <span className="btn-icon" aria-hidden>🌴</span>
+              {prev.title}
+            </b>
           </button>
           <button onClick={() => navigate(`/tours/${next.id}`)} className={`${styles.sib} ${styles.sibRight}`}>
             <small>Следующий тур →</small>
-            <b>{next.title} ⛱️</b>
+            <b>
+              {next.title}
+              <span className="btn-icon" aria-hidden>⛱️</span>
+            </b>
           </button>
         </div>
       </div>

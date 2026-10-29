@@ -30,8 +30,14 @@ export default function VideoBanner() {
           мантами. Мы едем туда и привозим вам живые рекомендации.
         </p>
         <div className={styles.ctas}>
-          <Link to="/gallery" className="btn btn--primary">📸 Смотреть галерею</Link>
-          <Link to="/about" className="btn btn--ghost">О команде →</Link>
+          <Link to="/gallery" className="btn btn--primary">
+            <span className="btn-icon" aria-hidden>📸</span>
+            Смотреть галерею
+          </Link>
+          <Link to="/about" className="btn btn--ghost">
+            О команде
+            <span className="btn-icon" aria-hidden>→</span>
+          </Link>
         </div>
       </div>
     </section>

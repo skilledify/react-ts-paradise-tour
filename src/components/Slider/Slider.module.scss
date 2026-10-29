@@ -3,6 +3,18 @@
 
   display: grid;
   gap: 1.1rem;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+
+  img {
+    -webkit-user-drag: none;
+  }
+}
+
+.dragging {
+  cursor: grabbing;
 }
 
 .row {
@@ -38,6 +50,7 @@
 }
 
 .viewport {
+  position: relative;
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -45,9 +58,58 @@
 
 .track {
   display: grid;
-  grid-template-columns: repeat(var(--cards), 1fr);
+  grid-template-columns: repeat(var(--cards), minmax(0, 1fr));
   gap: 1.1rem;
-  animation: floatUp 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.trackIn {
+  position: relative;
+  z-index: 2;
+  will-change: transform;
+}
+
+.trackOut {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.inNext {
+  animation: slideInNext 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.inPrev {
+  animation: slideInPrev 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.outNext {
+  animation: slideOutNext 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.outPrev {
+  animation: slideOutPrev 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes slideInNext {
+  from { transform: translate3d(100%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes slideInPrev {
+  from { transform: translate3d(-100%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes slideOutNext {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-100%, 0, 0); }
+}
+
+@keyframes slideOutPrev {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(100%, 0, 0); }
 }
 
 .card {
@@ -93,5 +155,25 @@
     width: 42px;
     height: 42px;
     font-size: 1.3rem;
+  }
+}
+
+/* На узких экранах стрелки убираем — листать можно свайпом или точками под слайдером */
+@media (max-width: 424.98px) {
+  .arrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inNext,
+  .inPrev,
+  .outNext,
+  .outPrev {
+    animation: none;
+  }
+
+  .trackOut {
+    display: none;
   }
 }

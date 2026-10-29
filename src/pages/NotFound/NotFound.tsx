@@ -14,8 +14,14 @@ export default function NotFound() {
           Но у нас есть всё, что нужно: туры, конструктор и галерея с живыми кадрами.
         </p>
         <div className={styles.btns}>
-          <Link to="/" className="btn btn--primary">🏠 На главную</Link>
-          <Link to="/tours" className="btn btn--ghost">🏝️ Все туры</Link>
+          <Link to="/" className="btn btn--primary">
+            <span className="btn-icon" aria-hidden>🏠</span>
+            На главную
+          </Link>
+          <Link to="/tours" className="btn btn--ghost">
+            <span className="btn-icon" aria-hidden>🏝️</span>
+            Все туры
+          </Link>
         </div>
       </div>
     </section>

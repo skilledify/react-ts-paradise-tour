@@ -325,7 +325,8 @@ export default function Calculator() {
                   )
                 }
               >
-                🚀 Забронировать за {money(calc.total)}
+                <span className="btn-icon" aria-hidden>🚀</span>
+                Забронировать за {money(calc.total)}
               </button>
 
               <small className={styles.fine}>

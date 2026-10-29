@@ -60,7 +60,8 @@ export default function TourCard({ tour }: { tour: Tour }) {
             <span>на человека</span>
           </div>
           <Link to={`/tours/${tour.id}`} className={styles.more}>
-            Подробнее <span aria-hidden>→</span>
+            Подробнее
+            <span className="btn-icon" aria-hidden>→</span>
           </Link>
         </div>
       </div>

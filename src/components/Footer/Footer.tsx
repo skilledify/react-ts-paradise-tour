@@ -113,7 +113,8 @@ export default function Footer() {
             </button>
           </form>
           <button className={`${styles.couponBtn}`} onClick={() => modal.openModal('Промокод Paradise Club')}>
-            🎁 Получить промокод на -5%
+            <span className="btn-icon" aria-hidden>🎁</span>
+            Получить промокод на -5%
           </button>
         </div>
       </div>

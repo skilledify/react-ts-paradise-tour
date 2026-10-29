@@ -10,6 +10,20 @@
   display: grid;
   gap: 1.4rem;
   max-width: 880px;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+
+.dragging {
+  cursor: grabbing;
+}
+
+.viewport {
+  position: relative;
+  isolation: isolate;
+  clip-path: inset(-40px 0 -40px 0);
 }
 
 .card {
@@ -20,7 +34,55 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: var(--shadow-card);
-  animation: floatUp 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.cardIn {
+  z-index: 2;
+  will-change: transform;
+}
+
+.cardOut {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.inNext {
+  animation: reviewInNext 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.inPrev {
+  animation: reviewInPrev 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.outNext {
+  animation: reviewOutNext 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.outPrev {
+  animation: reviewOutPrev 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes reviewInNext {
+  from { transform: translate3d(100%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes reviewInPrev {
+  from { transform: translate3d(-100%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes reviewOutNext {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-100%, 0, 0); }
+}
+
+@keyframes reviewOutPrev {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(100%, 0, 0); }
 }
 
 .quoteMark {
@@ -128,5 +190,25 @@
 @media (max-width: 560px) {
   .card {
     padding: 1.5rem 1.2rem 1.2rem;
+  }
+}
+
+/* На узких экранах стрелки убираем — листать можно свайпом или точками под отзывом */
+@media (max-width: 424.98px) {
+  .ctrl {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inNext,
+  .inPrev,
+  .outNext,
+  .outPrev {
+    animation: none;
+  }
+
+  .cardOut {
+    display: none;
   }
 }

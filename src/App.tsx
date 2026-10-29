@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ModalProvider } from './context/ModalContext';
 import { FavoritesProvider } from './context/FavoritesContext';
@@ -25,11 +25,15 @@ function ScrollToTop() {
   return null;
 }
 
+/* При деплое в подкаталог GitHub Pages (BASE_PATH=/repo/) роутер
+   должен учитывать этот префикс, чтобы пути оставались без «#». */
+const basename = import.meta.env.BASE_URL.replace(/\/+$/, '') || '/';
+
 export default function App() {
   return (
     <FavoritesProvider>
       <ModalProvider>
-        <HashRouter>
+        <BrowserRouter basename={basename}>
           {/* При смене маршрута — наверх */}
           <ScrollToTop />
 
@@ -51,7 +55,7 @@ export default function App() {
           <Footer />
           <BackToTop />
           <CallbackModal />
-        </HashRouter>
+        </BrowserRouter>
       </ModalProvider>
     </FavoritesProvider>
   );

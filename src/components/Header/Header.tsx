@@ -104,11 +104,13 @@ export default function Header() {
           {/* Подвал панели — телефон, избранное и звонок; только в drawer */}
           <div className={styles.drawerFoot}>
             <Link to="/tours?fav=1" className={styles.drawerFav}>
-              ❤️ Избранное
+              <span className="btn-icon" aria-hidden>❤️</span>
+              Избранное
               {fav.count > 0 && <b className={styles.drawerFavCount}>{fav.count}</b>}
             </Link>
             <a href="tel:+78005553535" className={styles.drawerPhone}>
-              📞 8 800 555-35-35
+              <span className="btn-icon" aria-hidden>📞</span>
+              8 800 555-35-35
             </a>
             <button
               className={`btn btn--primary ${styles.drawerCall}`}
@@ -131,7 +133,7 @@ export default function Header() {
 
         <div className={styles.actions}>
           <Link to="/tours?fav=1" className={styles.favBtn} aria-label={`Избранное, туров: ${fav.count}`}>
-            <span aria-hidden>❤️</span>
+            <span className="btn-icon" aria-hidden>❤️</span>
             {fav.count > 0 && <b className={styles.favCount}>{fav.count}</b>}
           </Link>
 
@@ -139,7 +141,8 @@ export default function Header() {
             className={`btn btn--ghost ${styles.callBtn}`}
             onClick={() => modal.openModal()}
           >
-            📞 Заказать звонок
+            <span className="btn-icon" aria-hidden>📞</span>
+            Заказать звонок
           </button>
 
           <button

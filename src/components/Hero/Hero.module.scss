@@ -64,7 +64,7 @@
 
 .title {
   font-size: clamp(2rem, 5.4vw, 3.9rem);
-  font-weight: 900;
+  font-weight: 800;
   text-shadow: 0 8px 44px rgba(4, 10, 31, 0.65);
   animation: floatUp 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
@@ -138,10 +138,17 @@
   padding: 0.82rem 1.7rem;
 }
 
+/* Лупа чуть меньше текста и оптически по центру строки:
+   ручка emoji не должна «свисать» ниже букв. */
+.searchIcon {
+  font-size: 1em;
+  transform: translateY(0.03em);
+}
+
 .ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.9rem;
   animation: floatUp 0.9s 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 

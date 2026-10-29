@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSwipe } from '../../hooks/useSwipe';
 import styles from './Slider.module.scss';
 
 interface SliderProps<T> {
@@ -42,18 +43,45 @@ export default function Slider<T>({
 }: SliderProps<T>) {
   const perView = useResponsivePerView();
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [previousIndex, setPreviousIndex] = useState<number | null>(null);
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const [hovered, setHovered] = useState(false);
   const [animKey, setAnimKey] = useState(0);
-  const touchX = useRef<number | null>(null);
+  const indexRef = useRef(0);
 
   const n = items.length;
+
   const go = useCallback(
     (delta: number) => {
-      setIndex((i) => (((i + delta) % n) + n) % n);
+      const current = indexRef.current;
+      const next = (((current + delta) % n) + n) % n;
+      if (next === current) return;
+
+      indexRef.current = next;
+      setPreviousIndex(current);
+      setDirection(delta > 0 ? 1 : -1);
+      setIndex(next);
       setAnimKey((k) => k + 1);
     },
     [n]
   );
+
+  const selectIndex = (next: number) => {
+    const current = indexRef.current;
+    if (next === current) return;
+
+    indexRef.current = next;
+    setPreviousIndex(current);
+    setDirection(next > current ? 1 : -1);
+    setIndex(next);
+    setAnimKey((k) => k + 1);
+  };
+
+  const swipe = useSwipe({
+    onSwipe: go,
+  });
+
+  const paused = hovered || swipe.dragging;
 
   useEffect(() => {
     if (!autoPlayMs || paused || n <= 1) return;
@@ -61,40 +89,61 @@ export default function Slider<T>({
     return () => clearInterval(id);
   }, [autoPlayMs, paused, go, n]);
 
-  // Видимый набор: пер-вью карточек с зацикливанием по кругу
-  const visible = Array.from({ length: Math.min(perView, n) }, (_, i) => items[(index + i) % n]);
+  // Убираем ушедший слайд после завершения анимации.
+  useEffect(() => {
+    if (previousIndex === null) return;
+    const id = window.setTimeout(() => setPreviousIndex(null), 620);
+    return () => window.clearTimeout(id);
+  }, [previousIndex, animKey]);
+
+  const cards = Math.min(perView, n);
+  const incomingClass =
+    animKey === 0 ? '' : direction === 1 ? styles.inNext : styles.inPrev;
+  const outgoingClass = direction === 1 ? styles.outNext : styles.outPrev;
+
+  const renderTrack = (start: number) =>
+    Array.from({ length: cards }, (_, i) => {
+      const itemIndex = (start + i) % n;
+      return (
+        <div className={styles.card} key={`${itemIndex}-${i}`}>
+          {renderItem(items[itemIndex], itemIndex)}
+        </div>
+      );
+    });
 
   return (
     <div
-      className={styles.slider}
+      className={`${styles.slider} ${swipe.dragging ? styles.dragging : ''}`}
       role="region"
       aria-label={ariaLabel}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
-      onTouchEnd={(e) => {
-        if (touchX.current == null) return;
-        const dx = e.changedTouches[0].clientX - touchX.current;
-        if (Math.abs(dx) > 46) go(dx > 0 ? -1 : 1);
-        touchX.current = null;
-      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      {...swipe.handlers}
     >
       <div className={styles.row}>
         <button className={styles.arrow} onClick={() => go(-1)} aria-label="Назад">
           ‹
         </button>
 
-        <div className={styles.viewport}>
+        <div
+          className={styles.viewport}
+          style={{ '--cards': cards } as React.CSSProperties}
+        >
+          {previousIndex !== null && (
+            <div
+              key={`out-${animKey}`}
+              className={`${styles.track} ${styles.trackOut} ${outgoingClass}`}
+              aria-hidden="true"
+            >
+              {renderTrack(previousIndex)}
+            </div>
+          )}
+
           <div
-            key={animKey}
-            className={styles.track}
-            style={{ '--cards': Math.min(perView, n) } as React.CSSProperties}
+            key={`in-${animKey}`}
+            className={`${styles.track} ${styles.trackIn} ${incomingClass}`}
           >
-            {visible.map((item, i) => (
-              <div className={styles.card} key={i} style={{ animationDelay: `${i * 90}ms` }}>
-                {renderItem(item, (index + i) % n)}
-              </div>
-            ))}
+            {renderTrack(index)}
           </div>
         </div>
 
@@ -112,10 +161,7 @@ export default function Slider<T>({
           <button
             key={i}
             className={`${styles.dot} ${i === index ? styles.dotActive : ''}`}
-            onClick={() => {
-              setIndex(i);
-              setAnimKey((k) => k + 1);
-            }}
+            onClick={() => selectIndex(i)}
             aria-label={`Слайд ${i + 1}`}
           />
         ))}
